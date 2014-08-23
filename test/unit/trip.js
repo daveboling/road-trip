@@ -7,7 +7,7 @@ var expect    = require('chai').expect,
     Trip    = require('../../app/models/trip'),
     dbConnect = require('../../app/lib/mongodb'),
     cp        = require('child_process'),
-    db        = 'trips';
+    db        = 'roadtrip';
 
 describe('Trip', function(){
   before(function(done){
@@ -72,8 +72,8 @@ describe('Trip', function(){
 
   describe('.all', function(){
     it('should get all people', function(done){
-      Trip.all(function(err, people){
-        expect(people).to.have.length(2);
+      Trip.all(function(err, trips){
+        expect(trips).to.have.length(3);
         done();
       });
     });

@@ -24,13 +24,14 @@ function Trip(o){
   this.tripCost     = this.gasPerGallon * this.gallons;
   this.delta        = this.cash - this.tripCost;
 
+  //Trip Stops/Events
   this.stops        = [];
   this.events       = [];
   this.photos       = [];
 }
 
 Object.defineProperty(Trip, 'collection', {
-  get: function(){return global.mongodb.collection('people');}
+  get: function(){return global.mongodb.collection('trips');}
 });
 
 Trip.all = function(cb){
