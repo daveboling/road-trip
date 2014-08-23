@@ -42,6 +42,8 @@ function geocode(origin, destination){
             destName   = destResults[0].formatted_address,
             destLat    = destResults[0].geometry.location.lat(),
             destLng    = destResults[0].geometry.location.lng();
+
+            getDistance({lat: originLat, lng: originLng}, {lat: destLat, lng: destLng});
   
         //Update origin before submit
         $('#originName').val(originName);
@@ -57,7 +59,34 @@ function geocode(origin, destination){
         $('form').submit();
       });
     });
-  }  
+  }
+
+function getDistance(o, d){
+  //Set origin and destination, turn them into floats because Google requires it to be a number
+  var origin = new google.maps.LatLng(parseFloat(o.lat), parseFloat(o.lng));
+  var destination = new google.maps.LatLng(parseFloat(d.lat), parseFloat(d.lng));
+
+  var service = new google.maps.DistanceMatrixService();
+  service.getDistanceMatrix(
+    {
+      origins: [origin],
+      destinations: [destination],
+      travelMode: google.maps.TravelMode.DRIVING,
+      unitSystem: google.maps.UnitSystem.IMPERIAL,
+    }, function(results, response){
+      //console.log(results, response);
+
+      var distance = results.rows[0].elements[0].distance.text;
+          distance = distance.split(' mi').join('').split(',').join('');
+
+      //Update value of distance in HTML before submitted
+      $('#distance').val(distance);
+
+    });
+
+}
+
+
 
 
 })();

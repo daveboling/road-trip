@@ -35,12 +35,12 @@ describe('Trip', function(){
         originName: ['Nashville, TN, USA'],
         destLat: ['36.17'],
         destLng: ['-115.14'],
-        destName: ['Las Vegas, TN, USA']
+        destName: ['Las Vegas, TN, USA'],
+        distance: ['1789'],
+        gasPerGallon : ['3.50']
       });
 
-
-      //Change destination and origi into objects
-      //that have a lat, lng and locationName
+      //Trip Properties from form
       expect(trip).to.be.instanceof(Trip);
       expect(trip.name).to.equal('Las Vegas 2013');
       expect(trip.cash).to.equal(1000);
@@ -54,6 +54,19 @@ describe('Trip', function(){
       expect(trip.destination.lat).to.equal(36.17);
       expect(trip.destination.lng).to.equal(-115.14);
       expect(trip.destination.name).to.equal('Las Vegas, TN, USA');
+      expect(trip.distance).to.equal(1789);
+      
+      //Trip Calculations
+      expect(trip.gasPerGallon).to.equal(3.5);
+      expect(trip.gallons).to.equal(52);
+      expect(trip.tripCost).to.equal(182);
+      expect(trip.delta).to.equal(818);
+
+
+      //Trip Stops/Events
+      expect(trip.stops).to.have.length(0);
+      expect(trip.events).to.have.length(0);
+      expect(trip.photos).to.have.length(0);
     });
   });
 

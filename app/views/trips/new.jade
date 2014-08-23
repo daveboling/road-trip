@@ -7,6 +7,7 @@ block content
               input#originLng(type='hidden' name='originLng')
               input#destLat(type='hidden' name='destLat')
               input#destLng(type='hidden' name='destLng')
+              input#distance(type='hidden' name='distance')
           .col-xs-3
             .form-group
               label Name
@@ -34,6 +35,13 @@ block content
               label End Date
               input.form-control(type="date" name='end' value='2014-11-25')
           .col-xs-3
+          .row
+            .col-xs-4
+            .col-xs-4
+              label Gas Price/Gallon
+              input.form-control(type='number' name='gasPrice' value='3.50')
+            .col-xs-4
+
         button(type='submit' form='tripForm').btn.btn-danger#submit Save Trip!
 
 block scripts
