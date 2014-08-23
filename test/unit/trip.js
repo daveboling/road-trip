@@ -4,8 +4,9 @@
 'use strict';
 
 var expect    = require('chai').expect,
-    Trip    = require('../../app/models/trip'),
+    Trip      = require('../../app/models/trip'),
     dbConnect = require('../../app/lib/mongodb'),
+    Mongo     = require('../../app/lib/mongodb'),
     cp        = require('child_process'),
     db        = 'roadtrip';
 
@@ -74,6 +75,31 @@ describe('Trip', function(){
     it('should get all people', function(done){
       Trip.all(function(err, trips){
         expect(trips).to.have.length(3);
+        done();
+      });
+    });
+  });
+
+  describe('.create', function(){
+    it('should create a new trip object', function(done){
+      var fields = {
+        name: ['Las Vegas 2013'],
+        cash: ['1000'],
+        mpg: ['35'],
+        begin: ['2014-10-05'],
+        end: ['2014-12-05'],
+        originLat: ['36.16'],
+        originLng: ['-86.8'],
+        originName: ['Nashville, TN, USA'],
+        destLat: ['36.17'],
+        destLng: ['-115.14'],
+        destName: ['Las Vegas, TN, USA'],
+        distance: ['1789'],
+        gasPerGallon : ['3.50']
+      };
+
+      Trip.create(fields, function(){
+        expect(fields).to.be.ok;
         done();
       });
     });

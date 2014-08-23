@@ -1,6 +1,7 @@
 'use strict';
 
-var mp = require('multiparty');
+var mp   = require('multiparty'),
+    Trip = require('../models/trip');
 
 exports.new = function(req, res){
   res.render('trips/new');
@@ -19,13 +20,16 @@ exports.create = function(req, res){
     console.log(files);
     console.log('----FILES END----');
 
-    res.redirect('/trips');
-
+    Trip.create(fields, files, function(){
+      res.redirect('/trips');
+    });
   });
 };
 
 exports.index = function(req, res){
-
+  Trip.all(function(err, trips){
+    res.render('trips/index', {trips: trips});
+  });
 };
 
 exports.stops = function(req, res){

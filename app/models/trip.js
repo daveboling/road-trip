@@ -7,7 +7,7 @@ var Mongo = require('mongodb'),
 
 function Trip(o){
   //ID given here so that we can save a photo without two calls to the database
-  this._id          = Mongo.ObjectID;
+  this._id          = Mongo.ObjectID();
   this.name         = o.name[0];
   this.cash         = o.cash[0] * 1;
   this.origin       = {name: o.originName[0], lat: parseFloat(o.originLat[0]), lng: parseFloat(o.originLng[0]) };
@@ -36,6 +36,35 @@ Object.defineProperty(Trip, 'collection', {
 
 Trip.all = function(cb){
   Trip.collection.find().toArray(cb);
+};
+
+Trip.create = function(fields, cb){
+  var trip = new Trip(fields);
+  console.log(trip);
+  //trip.moveFile(trip);
+  Trip.collection.save(trip, cb);
+};
+
+Trip.prototype.moveFile = function(files){
+  var baseDir = __dirname + '/../static',
+      relDir  = '/img/' + this._id,
+      absDir  = baseDir + relDir;
+
+  fs.mkdirSync(absDir);
+
+  this.photo = files.photos.map(function(photo, index){
+    if(!photo.size){return;}
+
+    var ext      = path.extname(photo.path),
+        name     = index + ext,
+        absPath  = absDir + '/' + name,
+        relPath  = relDir + '/' + name;
+
+    fs.renameSync(photo.path, absPath);
+    return relPath;
+  });
+
+  this.photo = _.compact(this.photo);
 };
 
 module.exports = Trip;
