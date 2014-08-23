@@ -1,8 +1,12 @@
 extends ../shared/template
 block content
       h2 Create New Road Trip
-      form(method='post' action='/trips/new')
+      form(method='post' action='/trips/new' id='tripForm' enctype='multipart/form-data')
           .col-xs-3
+              input#originLat(type='hidden' name='originLat')
+              input#originLng(type='hidden' name='originLng')
+              input#destLat(type='hidden' name='destLat')
+              input#destLng(type='hidden' name='destLng')
           .col-xs-3
             .form-group
               label Name
@@ -12,14 +16,14 @@ block content
               input.form-control(type='number' name='cash' value='500')
             .form-group
               label Origin
-              input.form-control(type='text' name='origin' value='Nashville')
+              input.form-control#originName(type='text' name='originName' value='Nashville')
             .form-group
               label Destination
-              input.form-control(type='text' name='destination' value='Las Vegas')
+              input.form-control#destName(type='text' name='destName' value='Las Vegas')
           .col-xs-3
             .form-group
               label Car Photo
-              input.form-control(type='file' name='photo')
+              input.form-control(type='file' name='photo' multiple=false)
             .form-group
               label MPG
               input.form-control(type="number" name='mpg' value='35')
@@ -30,11 +34,7 @@ block content
               label End Date
               input.form-control(type="date" name='end' value='2014-11-25')
           .col-xs-3
-        button.btn.btn-danger#submit Save Trip!
-
-
-
-
-
+        button(type='submit' form='tripForm').btn.btn-danger#submit Save Trip!
 
 block scripts
+  script(src='/js/user/new.js')

@@ -1,0 +1,15 @@
+{
+  "_id":{"$oid":"000000000000000000000001"},
+  "name":"Los Santos 2013",
+  "cash" : 1000,
+  "origin" : {
+    "name" : "Nashville, TN, USA",
+    "lat" : 36.16,
+    "lng" : -86.8
+  },
+  "destination" : {
+    "name" : "Las Vegas, TN, USA",
+    "lat" : 36.17,
+    "lng" : -115.14
+  }
+}
