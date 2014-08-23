@@ -6,7 +6,6 @@
 var expect    = require('chai').expect,
     Trip      = require('../../app/models/trip'),
     dbConnect = require('../../app/lib/mongodb'),
-    Mongo     = require('../../app/lib/mongodb'),
     cp        = require('child_process'),
     db        = 'roadtrip';
 
@@ -107,7 +106,10 @@ describe('Trip', function(){
 
   describe('.findByID', function(){
     it('should find a specific trip by its ID', function(done){
-      
+      Trip.findById('000000000000000000000001', function(trip){
+        expect(trip).to.be.ok;
+        done();
+      });
     });
   });
 

@@ -40,7 +40,6 @@ Trip.all = function(cb){
 
 Trip.create = function(fields, file, cb){
   var trip = new Trip(fields);
-  console.log(file);
   trip.moveFile(file);
   Trip.collection.save(trip, cb);
 };

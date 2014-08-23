@@ -6,7 +6,6 @@
 
   $(document).ready(function(){
     $('form').submit(addTrip);
-
   });
 
 
@@ -22,7 +21,7 @@ function addTrip(e){
       var destName = $('#destName').val();
 
       //Geocode source and destination
-      geocode(originName, destName); 
+      geocode(originName, destName);
 
       //Prevent form from submitting before it's done geocoding
       e.preventDefault();

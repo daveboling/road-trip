@@ -35,6 +35,11 @@ exports.index = function(req, res){
 
 exports.stops = function(req, res){
   Trip.findById(req.params.id, function(trip){
+    
+    console.log('---FOUND STOP---');
+    console.log(trip);
+    console.log('---FOUND STOP END---');
+
     res.render('trips/stops', {trip: trip});
   });
 };
