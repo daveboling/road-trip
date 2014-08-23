@@ -38,11 +38,19 @@ Trip.all = function(cb){
   Trip.collection.find().toArray(cb);
 };
 
-Trip.create = function(fields, cb){
+Trip.create = function(fields, file, cb){
   var trip = new Trip(fields);
-  console.log(trip);
-  //trip.moveFile(trip);
+  console.log(file);
+  trip.moveFile(file);
   Trip.collection.save(trip, cb);
+};
+
+Trip.findById = function(query, cb){
+  var id = Mongo.ObjectID(query);
+  Trip.collection.findOne({_id: id}, function(err, obj){
+    var trip = _.create(Trip.prototype, obj);
+    cb(trip);
+  });
 };
 
 Trip.prototype.moveFile = function(files){
@@ -52,7 +60,7 @@ Trip.prototype.moveFile = function(files){
 
   fs.mkdirSync(absDir);
 
-  this.photo = files.photos.map(function(photo, index){
+  this.photo = files.photo.map(function(photo, index){
     if(!photo.size){return;}
 
     var ext      = path.extname(photo.path),

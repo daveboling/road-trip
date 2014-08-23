@@ -98,10 +98,16 @@ describe('Trip', function(){
         gasPerGallon : ['3.50']
       };
 
-      Trip.create(fields, function(){
+      Trip.create(fields, {photo: [{path: ''}]}, function(){
         expect(fields).to.be.ok;
         done();
       });
+    });
+  });
+
+  describe('.findByID', function(){
+    it('should find a specific trip by its ID', function(done){
+      
     });
   });
 

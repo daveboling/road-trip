@@ -1,2 +1,37 @@
 extends ../shared/template
 block content
+    h2 Road Trips
+    table.table.table-bordered
+      tr
+        th Name
+        th Cash
+        th Begin
+        th End
+        th From
+        th To
+        th Stops
+        th Distance
+        th MPG
+        th Gas/Gallon
+        th Gallons
+        th Cost
+        th Delta
+        th Photos
+        th Events
+          each trip in trips
+            tr
+              td: a(href="/trips/#{trip._id}")= trip.name
+              td= trip.cash
+              td= moment(trip.begin).format('MM/DD/YYYY')
+              td= moment(trip.end).format('MM/DD/YYYY')
+              td= trip.origin.name
+              td= trip.destination.name
+              td= trip.stops.length
+              td= trip.distance
+              td= trip.mpg
+              td= trip.gasPerGallon
+              td= trip.gallons
+              td= trip.tripCost
+              td= trip.delta
+              td= trip.events.length
+              td= trip.photos.length

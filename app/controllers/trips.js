@@ -1,7 +1,8 @@
 'use strict';
 
-var mp   = require('multiparty'),
-    Trip = require('../models/trip');
+var mp     = require('multiparty'),
+    Trip   = require('../models/trip'),
+    moment = require('moment');
 
 exports.new = function(req, res){
   res.render('trips/new');
@@ -28,12 +29,14 @@ exports.create = function(req, res){
 
 exports.index = function(req, res){
   Trip.all(function(err, trips){
-    res.render('trips/index', {trips: trips});
+    res.render('trips/index', {trips: trips, moment: moment});
   });
 };
 
 exports.stops = function(req, res){
-
+  Trip.findById(req.params.id, function(trip){
+    res.render('trips/stops', {trip: trip});
+  });
 };
 
 exports.createStop = function(req, res){

@@ -33,7 +33,7 @@ function geocode(origin, destination){
     var geocoder = new google.maps.Geocoder();
 
     //Since geocoder requires a callback, we must wait until both are done
-    //Henceforth, Pyramid of doom.
+    //Henceforth, Pyramid of Doom.
     geocoder.geocode({address: origin}, function(originResults, status){
       geocoder.geocode({address: destination}, function(destResults, status){
         var originName = originResults[0].formatted_address,
@@ -81,7 +81,6 @@ function getDistance(o, d){
 
       //Update value of distance in HTML before submitted
       $('#distance').val(distance);
-
     });
 
 }

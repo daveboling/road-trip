@@ -1,0 +1,22 @@
+extends ../shared/template
+block content
+    h2 Trip Stops
+      #map
+      .row
+        .col-xs-6
+          h5 Stops
+        .col-xs-6
+          h5 Add Stop
+          form(method='put' id='stopsForm' actions='/trips/#{trip._id}')
+            button(type='button').btn.btn-danger Add Additional Stop
+            input(type='text' name='stop')
+      .row
+        .col-xs-6
+          h5 Directions
+          #directions
+        .col-xs-6
+
+
+
+block scripts
+  script(src='/js/user/stops.js')
