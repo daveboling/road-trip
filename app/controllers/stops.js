@@ -25,12 +25,13 @@ exports.createEvent = function(req, res){
   var form = new mp.Form();
 
   form.parse(req, function(err, fields, files){
-    console.log('---FIELDS START---');
-    console.log(fields);
-    console.log('---FIELDS END---');
-
-    console.log('---FILES START---');
-    console.log(files);
-    console.log('---FILES END---');
+    Stop.findById(req.params.stopid, function(stop){
+      console.log(stop);
+      stop.eventsAndPhotos(files, fields, function(){
+        Trip.collection.update({_id: Mongo.ObjectID(req.params.id)}, {$push : {events: {$each : fields.events}}}, function(){
+          res.redirect('/trips/' + req.params.id + '/stops/' + req.params.stopid);
+        });
+      });
+    });
   });
 };

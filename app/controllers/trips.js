@@ -30,8 +30,6 @@ exports.stops = function(req, res){
     Stop.find(req.params.id, function(stops){
       res.render('trips/stops', {trip: trip, stops: stops});
     });
-
-
   });
 };
 

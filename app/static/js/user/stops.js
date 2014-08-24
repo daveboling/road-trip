@@ -31,9 +31,6 @@
       });
     }
 
-    //waypoints = _.compact(waypoints);
-    console.log(waypoints);
-
     //Initialize map with current set of waypoints
     initialize(origin, destination, waypoints);
 

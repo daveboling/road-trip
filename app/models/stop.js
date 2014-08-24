@@ -46,21 +46,24 @@ Stop.find = function(query, cb){
 
 Stop.findById = function(query, cb){
   var id = Mongo.ObjectID(query);
-  Stop.collection.findOne({_id: id}, function(err, stop){
+  Stop.collection.findOne({_id: id}, function(err, obj){
+    var stop = _.create(Stop.prototype, obj);
     cb(stop);
   }); 
 };
 
-
-Stop.prototype.addPhotos = function(files){
+Stop.prototype.eventsAndPhotos = function(files, fields, cb){
+  //ADD PHOTOS TO FILE SYSTEM AND PHOTOS ARRAY
   var baseDir = __dirname + '/../static',
       relDir  = '/img/' + this._id,
-      absDir  = baseDir + relDir;
+      absDir  = baseDir + relDir,
+      self = this;
 
-  fs.mkdirSync(absDir);
-
+  //Stops mkdirSync from trying to create a dir if there isn't a photo to upload
   this.photos = files.photos.map(function(photo, index){
     if(!photo.size){return;}
+
+  fs.mkdirSync(absDir);
 
     var ext      = path.extname(photo.path),
         name     = index + ext,
@@ -72,6 +75,18 @@ Stop.prototype.addPhotos = function(files){
   });
 
   this.photos = _.compact(this.photos);
+
+
+  //Push events to events array
+  fields.events.forEach(function(e){
+    //Don't let blank values through
+    if(!e) { return; }
+    self.events.push(e);
+  });
+
+  //SAVE AFTER IT'S ALL DONE
+  Stop.collection.save(this, cb);
+
 };
 
 module.exports = Stop;

@@ -17,10 +17,12 @@ block content
             button(type='button').btn.btn-success.full#addEvent Add More Events
             label Add Event(s)
             .event
-              input.form-control(type='text' name='event')
+              input.form-control(type='text' name='events')
     .row
       .col-xs-6
         #photos
+          each photo in stop.photos
+            .eventPhoto(style='background-image: url(#{photo})')
       .col-xs-6
         button(type='submit' form='events').btn.btn-danger.full Submit
 
