@@ -57,24 +57,26 @@ Stop.prototype.eventsAndPhotos = function(files, fields, cb){
   var baseDir = __dirname + '/../static',
       relDir  = '/img/' + this._id,
       absDir  = baseDir + relDir,
+      exists = fs.existsSync(absDir),
       self = this;
 
+  if(!exists){
+    fs.mkdirSync(absDir);
+  }
+
   //Stops mkdirSync from trying to create a dir if there isn't a photo to upload
-  this.photos = files.photos.map(function(photo, index){
-    if(!photo.size){return;}
+  files.photos.forEach(function(photo){
+    var ext = path.extname(photo.path),
+        fileName = self.photos.length + ext,
+        rel = relDir + '/' + fileName,
+        abs = absDir + '/' + fileName;
+    fs.renameSync(photo.path, abs);
 
-  fs.mkdirSync(absDir);
+    self.photos.push(rel);
 
-    var ext      = path.extname(photo.path),
-        name     = index + ext,
-        absPath  = absDir + '/' + name,
-        relPath  = relDir + '/' + name;
-
-    fs.renameSync(photo.path, absPath);
-    return relPath;
   });
 
-  this.photos = _.compact(this.photos);
+  //this.photos = _.compact(this.photos);
 
 
   //Push events to events array
