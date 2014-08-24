@@ -19,9 +19,9 @@
     //Convert stops to waypoints for Google Maps
     if(!waypoints.length){ 
       waypoints = waypoints.map(function(div){
-        var lat  = $('.coordinates').attr('data-lat'),
-        lng  = $('.coordinates').attr('data-lng');
-        return {location: new google.maps.LatLng(lat, lng)};
+        //var lat  = $('.coordinates').attr('data-lat'),
+        //lng  = $('.coordinates').attr('data-lng');
+        //return {location: new google.maps.LatLng(lat, lng)};
       });
     }
 
@@ -31,7 +31,8 @@
   });
 
   function addAdditionalStop(){
-
+    var $input = "<input class='form-control' type='text' name='stop'/>";
+    $('#stops').append($input);
   }
 
   function initialize(origin, destination, stops){
@@ -56,13 +57,14 @@
       origin: origin,
       destination: destination,
       waypoints: stops,
+      optimizeWaypoints: false,
       travelMode: google.maps.DirectionsTravelMode.DRIVING
     };
 
     //Display driving directions
     var directionsService = new google.maps.DirectionsService();
     directionsDisplay.setPanel(document.getElementById('directions'));
-    
+
     //Sends our request to directionsService where it will tell us if we're crazy or not
     directionsService.route(request, function(response, status) {
           if (status === google.maps.DirectionsStatus.OK) {

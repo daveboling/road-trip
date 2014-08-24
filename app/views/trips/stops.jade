@@ -7,7 +7,7 @@ block content
         h5 Stops
       .col-xs-6
         form(method='put' id='stopsForm' actions='/trips/#{trip._id}')
-          button(type='button').btn.btn-danger.full#add Add Additional Stop
+          button(type='button')#add.btn.btn-danger.full Add Additional Stop
           .form-group#stops
             label Add Stop(s)
             input.form-control(type='text' name='stop')
