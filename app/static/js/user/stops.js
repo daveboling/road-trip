@@ -11,20 +11,24 @@
 
     //Origin and Destination variables
     var $coordinates = $('.coordinates'),
-           waypoints = [],
               origin = new google.maps.LatLng($coordinates.attr('data-olat'), $coordinates.attr('data-olng')),
-         destination = new google.maps.LatLng($coordinates.attr('data-dlat'), $coordinates.attr('data-dlng'));
+         destination = new google.maps.LatLng($coordinates.attr('data-dlat'), $coordinates.attr('data-dlng')),
+               stops = $('.stop'),
+           waypoints = [];
 
-
+           stops = $.makeArray(stops);
+           console.log(stops);
 
     //Convert stops to waypoints for Google Maps
-    if(!waypoints.length){
-      waypoints = waypoints.map(function(div){
+    if(stops.length){
+      waypoints = stops.map(function(div){
         var lat  = $(div).attr('data-lat'),
         lng  = $(div).attr('data-lng');
-        return {location: new google.maps.LatLng(lat, lng)};
+        return {location: new google.maps.LatLng(parseFloat(lat), parseFloat(lng))};
       });
     }
+
+    console.log(waypoints);
 
     initialize(origin, destination, waypoints);
 

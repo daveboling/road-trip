@@ -2,7 +2,8 @@
 
 var mp     = require('multiparty'),
     Trip   = require('../models/trip'),
-    moment = require('moment');
+    moment = require('moment'),
+    Stop   = require('../models/stop');
 
 exports.new = function(req, res){
   res.render('trips/new');
@@ -35,7 +36,7 @@ exports.index = function(req, res){
 
 exports.stops = function(req, res){
   Trip.findById(req.params.id, function(trip){
-    Trip.findStops(req.params.id, function(stops){
+    Stop.find(req.params.id, function(stops){
 
       console.log('---FOUND TRIP---');
       console.log(trip);

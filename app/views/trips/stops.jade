@@ -5,6 +5,9 @@ block content
     .row
       .col-xs-6
         h5 Stops
+        ol
+          each stop in stops
+            li: a.stop(href='/trips/#{trip._id}/stop/#{stop._id}' data-lat=stop.lat, data-lng=stop.lng)= stop.name
       .col-xs-6
         form(method='put' id='stopsForm' actions='/trips/#{trip._id}')
           button(type='button')#add.btn.btn-danger.full Add Additional Stop

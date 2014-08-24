@@ -7,7 +7,7 @@ var Mongo = require('mongodb'),
 
 function Stop(o){
   this._id     = Mongo.ObjectID();
-  this._tripID = o._tripID;
+  this._tripID = Mongo.ObjectID(o._tripID);
   this.name    = o.name;
   this.lat     = o.lat * 1;
   this.lng     = o.lng * 1;
@@ -20,9 +20,17 @@ Object.defineProperty(Stop, 'collection', {
 });
 
 Stop.find = function(query, cb){
-  Stop.collection.find({_tripID: query}).toArray(function(err, stops){
+  var id = Mongo.ObjectID(query);
+  Stop.collection.find({_tripID: id}).toArray(function(err, stops){
     cb(stops);
   });
+};
+
+Stop.findById = function(query, cb){
+  var id = Mongo.ObjectID(query);
+  Stop.collection.findOne({_id: id}, function(err, stop){
+    cb(stop);
+  }); 
 };
 
 module.exports = Stop;

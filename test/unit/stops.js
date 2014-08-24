@@ -41,6 +41,23 @@ describe('Stop', function(){
     });
   });
 
+  describe('.find', function(){
+    it('should find stops based on a _tripID', function(done){
+      Stop.find('000000000000000000000001', function(stops){
+        expect(stops).to.have.length(1);
+        done();
+      });
+    });
+  });
+
+  describe('findById', function(){
+    it('should find a stop based on its _id', function(done){
+      Stop.findById('100000000000000000000000', function(stop){
+        expect(stop.name).to.equal('Knoxville, TN, USA');
+        done();
+      });
+    });
+  });
 
 
 });
