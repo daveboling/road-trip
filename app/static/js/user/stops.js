@@ -17,8 +17,10 @@
                stops = $('.stop'),
            waypoints = [];
 
+
     //Turn stop into an array
     stops = $.makeArray(stops);
+
 
     //Convert stops to waypoints for Google Maps
     if(stops.length){
@@ -28,6 +30,9 @@
         return {location: new google.maps.LatLng(parseFloat(lat), parseFloat(lng))};
       });
     }
+
+    //waypoints = _.compact(waypoints);
+    console.log(waypoints);
 
     //Initialize map with current set of waypoints
     initialize(origin, destination, waypoints);
@@ -88,10 +93,6 @@
     var addresses = $('.stop-group .form-control').toArray().map(function(a){
       return $(a).val();
     });
-
-    console.log('--MAPPED STOPS FROM FORM--');
-    console.log(addresses);
-    console.log('--MAPPED STOPS FROM END--');
 
     //Since geocoding needs to communicate somewhere
     //we need async map to asynchronously loop over the addresses

@@ -16,7 +16,9 @@ exports.createStop = function(req, res){
 };
 
 exports.events = function(req, res){
-
+  Stop.findById(req.params.stopid, function(stop){
+    res.render('stops/index', {stop: stop, tripID: req.params.id});
+  });
 };
 
 exports.createEvent = function(req, res){

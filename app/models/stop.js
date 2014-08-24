@@ -51,4 +51,9 @@ Stop.findById = function(query, cb){
   }); 
 };
 
+Stop.findEvents = function(query, cb){
+  var id = Mongo.ObjectID(query);
+  Stop.collection.findOne({_id: id})
+};
+
 module.exports = Stop;
