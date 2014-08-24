@@ -3,8 +3,7 @@
 var Mongo = require('mongodb'),
     _     = require('lodash'),
     fs    = require('fs'),
-    path  = require('path'),
-    Stop  = require('./stop');
+    path  = require('path');
 
 function Stop(o){
   this._id     = Mongo.ObjectID();
