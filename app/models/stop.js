@@ -8,7 +8,7 @@ var Mongo = require('mongodb'),
 
 function Stop(o){
   this._id     = Mongo.ObjectID();
-  this._tripID = Mongo.ObjectID(o._tripID);
+  this._tripID = o.tripID;
   this.name    = o.name;
   this.lat     = o.lat * 1;
   this.lng     = o.lng * 1;
@@ -21,17 +21,23 @@ Object.defineProperty(Stop, 'collection', {
 });
 
 //insert will do bulk inserts or just one if needed
-Stop.insert = function(stops, cb){
+Stop.insert = function(stops, tripID, cb){
   var s;
 
   //if stops has a length, it needs to be mapped
   if(stops.length){
     s = stops.map(function(s){
+      s.tripID = Mongo.ObjectID(tripID);
       return new Stop(s);
     });
   }else {
     s = new Stop(stops);
+    s.tripID = Mongo.ObjectID(tripID);
   }
+
+  console.log('---MODEL---');
+  console.log('---NEWLY CONSTRUCTED STOP(S)');
+  console.log(s);
 
   Stop.collection.insert(s, cb);
 };

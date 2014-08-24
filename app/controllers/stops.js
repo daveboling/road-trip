@@ -8,12 +8,12 @@ var mp     = require('multiparty'),
 exports.createStop = function(req, res){
 
   console.log('---GEOCODED STOPS---');
-  console.log(req.body.stop);
+  console.log(req.body);
   console.log('---GEOCODES STOPS END---');
 
-  Stop.insert(req.body.stop, function(){
+  Stop.insert(req.body.stop, req.body.tripID, function(){
     res.redirect('/trips/' + req.params.id );
-  })
+  });
 };
 
 exports.events = function(req, res){
