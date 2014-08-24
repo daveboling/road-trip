@@ -1,32 +1,61 @@
-## name of project
+## road-trip
 ### Code Badges
-build status icon
-coverage status icon
+[![Build Status](https://travis-ci.org/kadowki/road-trip.svg)](https://travis-ci.org/kadowki/road-trip)
+[![Coverage Status](https://coveralls.io/repos/kadowki/road-trip/badge.png)](https://coveralls.io/r/kadowki/road-trip)
 
 ### About
-write a description about your project
+A road trip planner built on NodeJS, MongoDB, jQuery and Google Maps API.
 
 ### Models
 ```
-Model 1
-prop-a
-prop-b
-.classMethod-c
-#instanceMethod-d
+Trip
+prop-_id   
+prop-name         
+prop-cash       
+prop-origin       
+prop-destination  
+prop-mpg 
+prop-begin
+prop-end
+prop-photo
+prop-distance
+prop-gasPerGallon 
+prop-gallons  
+prop-tripCost
+prop-delta
+prop-stops
+prop-events
+prop-photos
+.classmethod-all
+.classmethod-create
+.classmethod-findById
+.classmethod-findStops
+.instancemethod-movefile
 ```
 
 ```
-Model 2
-prop-e
-prop-f
-.classMethod-g
-#instanceMethod-h
+Stop
+prop-_id
+prop-_tripID
+prop-name
+prop-lat
+prop-lng
+prop-events
+prop-photos
+
+.classmethod-find
+.classmethod-findById
+.classmethod-insert
+.instance-eventsAndPhotos
+
 ```
 
 ### Features
-- feature 1
-- feature 2
-- feature 3
+- Google Maps API
+- jQuery
+- NodeJS
+- MongoDB
+- Jade
 
 ### Running Tests
 ```bash
@@ -35,7 +64,7 @@ $ npm test
 ```
 
 ### Contributors
-- [Chyld Medford](https://github.com/chyld)
+- [David D. Boling](https://github.com/kadowki)
 
 ### License
 [MIT](LICENSE)
