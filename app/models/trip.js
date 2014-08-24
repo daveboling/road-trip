@@ -3,7 +3,8 @@
 var Mongo = require('mongodb'),
     _     = require('lodash'),
     fs    = require('fs'),
-    path  = require('path');
+    path  = require('path'),
+    Stop  = require('./stop');
 
 function Trip(o){
   //ID given here so that we can save a photo without two calls to the database
@@ -49,6 +50,12 @@ Trip.findById = function(query, cb){
   Trip.collection.findOne({_id: id}, function(err, obj){
     var trip = _.create(Trip.prototype, obj);
     cb(trip);
+  });
+};
+
+Trip.findStops = function(query, cb){
+  Stop.find(query, function(stops){
+    cb(stops);
   });
 };
 
