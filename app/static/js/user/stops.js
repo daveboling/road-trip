@@ -8,7 +8,7 @@
 
   $(document).ready(function(){
     $('#add').click(addAdditionalStop);
-    //$('button[type=submit]').click(geoStops);
+    $('button[type=submit]').click(geoStops);
 
     //Origin and Destination variables
     var $coordinates = $('.coordinates'),
@@ -17,7 +17,8 @@
                stops = $('.stop'),
            waypoints = [];
 
-           stops = $.makeArray(stops);
+    //Turn stop into an array
+    stops = $.makeArray(stops);
 
     //Convert stops to waypoints for Google Maps
     if(stops.length){
@@ -82,8 +83,52 @@
     });
   }
 
+  function geoStops(e){
+    //Creates an array of the name field's values
+    var addresses = $('.stop-group .form-control').toArray().map(function(a){
+      return $(a).val();
+    });
 
-  
+    console.log('--MAPPED STOPS FROM FORM--');
+    console.log(addresses);
+    console.log('--MAPPED STOPS FROM END--');
+
+    //Since geocoding needs to communicate somewhere
+    //we need async map to asynchronously loop over the addresses
+    //we just made and update their fields.
+    async.map(addresses, iterator, results);
+
+    e.preventDefault();
+
+  }
+
+  //iterator takes two parameters: index and a callback for when done
+  //the callback here is meant to do something asynchronously in a loop
+  //hence the need for async.map
+  function iterator(address, cb){
+    //We're geocoding the address and expecting geocode to give
+    //us back a name, lat, and lng.
+    geocode(address, function(name, lat, lng){
+      cb(null, {name:name, lat:lat, lng:lng});
+    });
+  }
+
+  //results takes two parameters: err and transformed array
+  function results(err, newStops){
+    //if we clone the fields before adding, then we can't target
+    //fields individually, but CAN update the values and then prepend
+    newStops.forEach(function(stop, i){
+      $('form').prepend("<input type='hidden' name='stop[" + i +"][name]' value='" + stop.name +"' />");
+      $('form').prepend("<input type='hidden' name='stop[" + i +"][lat]' value='" + stop.lat +"' />");
+      $('form').prepend("<input type='hidden' name='stop[" + i +"][lng]' value='" + stop.lng +"' />");
+    });
+
+    //Finally ready to submit
+    $('form').submit();
+  }
+
+
+
 
 
 

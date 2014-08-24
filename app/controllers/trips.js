@@ -53,16 +53,4 @@ exports.stops = function(req, res){
   });
 };
 
-exports.createStop = function(req, res){
-  Trip.findById(req.params.id, function(trip){
-    
-  });
-};
 
-exports.events = function(req, res){
-
-};
-
-exports.createEvent = function(req, res){
-
-};

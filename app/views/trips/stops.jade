@@ -10,14 +10,13 @@ block content
             li: a.stop(href='/trips/#{trip._id}/stop/#{stop._id}' data-lat=stop.lat, data-lng=stop.lng)= stop.name
       .col-xs-6
         form(method='post' id='stopsForm' actions='/trips/#{trip._id}')
+          input(type='hidden' name='tripID' value='#{trip._id}')
           button(type='button')#add.btn.btn-danger.full Add Additional Stop
           .form-group
             label Add Stop(s)
           #stops
           .stop-group
-            input.form-control(type='text' name='stop[name]')
-            input(type='hidden' name='stop[lat]')
-            input(type='hidden' name='stop[lng]')
+            input.form-control(type='text' name='name')
           button(type='submit' form='stopsForm').btn.btn-default.full Submit
     .row
       .col-xs-6Array
