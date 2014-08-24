@@ -66,6 +66,8 @@ Stop.prototype.eventsAndPhotos = function(files, fields, cb){
 
   //Stops mkdirSync from trying to create a dir if there isn't a photo to upload
   files.photos.forEach(function(photo){
+    if(!photo.size){ return; } //If it's not a photo, don't let it push to photos
+
     var ext = path.extname(photo.path),
         fileName = self.photos.length + ext,
         rel = relDir + '/' + fileName,

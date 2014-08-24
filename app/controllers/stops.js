@@ -28,7 +28,7 @@ exports.createEvent = function(req, res){
     Stop.findById(req.params.stopid, function(stop){
       console.log(stop);
       stop.eventsAndPhotos(files, fields, function(){
-        Trip.collection.update({_id: Mongo.ObjectID(req.params.id)}, {$push : {events: {$each : fields.events}}}, function(){
+        Trip.collection.update({_id: Mongo.ObjectID(req.params.id)}, {$push : {events: {$each : fields.events}, photos: {$each: files.photos}}}, function(){
           res.redirect('/trips/' + req.params.id + '/stops/' + req.params.stopid);
         });
       });
