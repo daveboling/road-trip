@@ -19,10 +19,11 @@ block content
             input.form-control(type='text' name='name')
           button(type='submit' form='stopsForm').btn.btn-default.full Submit
     .row
-      .col-xs-6Array
+      .col-xs-6
         h5 Directions
         #directions
       .col-xs-6
+        #photo(style='background-image: url(#{trip.photo[0]})')
 
 
 block scripts
