@@ -8,6 +8,7 @@
 
   $(document).ready(function(){
     $('#add').click(addAdditionalStop);
+    //$('button[type=submit]').click(geoStops);
 
     //Origin and Destination variables
     var $coordinates = $('.coordinates'),
@@ -17,7 +18,6 @@
            waypoints = [];
 
            stops = $.makeArray(stops);
-           console.log(stops);
 
     //Convert stops to waypoints for Google Maps
     if(stops.length){
@@ -28,16 +28,16 @@
       });
     }
 
-    console.log(waypoints);
-
+    //Initialize map with current set of waypoints
     initialize(origin, destination, waypoints);
 
 
   });
 
   function addAdditionalStop(){
-    var $input = "<input class='form-control' type='text' name='stop'/>";
-    $('#stops').append($input);
+    var $input = $('form > .stop-group:last-of-type'),
+        $clone = $input.clone();
+    $('form #stops').append($clone);
   }
 
   function initialize(origin, destination, stops){
@@ -49,6 +49,7 @@
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       styles: styles
     },
+
     //Display driving directions
     directionsService = new google.maps.DirectionsService();
 
@@ -71,7 +72,7 @@
 
     //Sends our request to directionsService where it will tell us if we're crazy or not
     directionsService.route(request, function(response, status){
-      if (status === google.maps.DirectionsStatus.OK) {
+      if (status === google.maps.DirectionsStatus.OK){
         directionsDisplay.setDirections(response);
       }
       else {
@@ -80,5 +81,10 @@
       }
     });
   }
+
+
+  
+
+
 
 })();

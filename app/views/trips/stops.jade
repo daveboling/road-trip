@@ -9,14 +9,18 @@ block content
           each stop in stops
             li: a.stop(href='/trips/#{trip._id}/stop/#{stop._id}' data-lat=stop.lat, data-lng=stop.lng)= stop.name
       .col-xs-6
-        form(method='put' id='stopsForm' actions='/trips/#{trip._id}')
+        form(method='post' id='stopsForm' actions='/trips/#{trip._id}')
           button(type='button')#add.btn.btn-danger.full Add Additional Stop
-          .form-group#stops
+          .form-group
             label Add Stop(s)
-            input.form-control(type='text' name='stop')
-          button(type='submit').btn.btn-default.full Submit
+          #stops
+          .stop-group
+            input.form-control(type='text' name='stop[name]')
+            input(type='hidden' name='stop[lat]')
+            input(type='hidden' name='stop[lng]')
+          button(type='submit' form='stopsForm').btn.btn-default.full Submit
     .row
-      .col-xs-6
+      .col-xs-6Array
         h5 Directions
         #directions
       .col-xs-6

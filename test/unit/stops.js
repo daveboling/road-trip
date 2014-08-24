@@ -7,7 +7,7 @@ var expect    = require('chai').expect,
     Stop      = require('../../app/models/stop'),
     dbConnect = require('../../app/lib/mongodb'),
     cp        = require('child_process'),
-    db        = 'roadtrip';
+    db        = 'stop-test';
 
 describe('Stop', function(){
   before(function(done){
@@ -50,10 +50,51 @@ describe('Stop', function(){
     });
   });
 
-  describe('findById', function(){
+  describe('.findById', function(){
     it('should find a stop based on its _id', function(done){
       Stop.findById('100000000000000000000000', function(stop){
         expect(stop.name).to.equal('Knoxville, TN, USA');
+        done();
+      });
+    });
+  });
+
+  describe('.insert', function(){
+    it('should insert multiple entries to the stops database', function(done){
+      var stops = [
+        {
+          name: 'Knoxville',
+          lat: '36',
+          lng: '90',
+          tripID: '000000000000000000000001'
+        },
+        {
+          name: 'Seymour',
+          lat: '40',
+          lng: '90',
+          tripID: '000000000000000000000001'
+        }
+
+      ];
+
+      Stop.insert(stops, function(err, s){
+        console.log('Insert Multiple Stops Error:', err);
+        expect(s).to.be.ok;
+        done();
+      });
+    });
+
+    it('should insert one entries to the stops database', function(done){
+      var stop = {
+          name: 'Knoxville',
+          lat: '36',
+          lng: '90',
+          tripID: '000000000000000000000001'
+        };
+
+      Stop.insert(stop, function(err, s){
+        console.log('Insert Multiple Stops Error:', err);
+        expect(s).to.be.ok;
         done();
       });
     });

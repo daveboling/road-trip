@@ -80,7 +80,6 @@
         //Update value of distance in HTML before submitted
         $('#distance').val(distance);
       });
-
   }
 
 })();
