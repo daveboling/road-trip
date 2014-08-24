@@ -1,4 +1,4 @@
-/* global google, async, geocode */
+/* global google */
 /* jshint quotmark:false */
 
 (function(){
@@ -17,7 +17,9 @@
 
 
   function addEventField(){
-
+    var $input = $('.event > input:last-of-type'),
+        $clone = $input.clone();
+    $('.event').append($clone);
   }
 
 

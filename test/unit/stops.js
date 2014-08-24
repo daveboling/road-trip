@@ -76,7 +76,6 @@ describe('Stop', function(){
       ];
 
       Stop.insert(stops,'000000000000000000000001', function(err, s){
-        console.log('Insert Multiple Stops Error:', err);
         expect(s).to.be.ok;
         done();
       });
@@ -90,12 +89,13 @@ describe('Stop', function(){
         };
 
       Stop.insert(stop, '000000000000000000000001', function(err, s){
-        console.log('Insert Multiple Stops Error:', err);
         expect(s).to.be.ok;
         done();
       });
     });
   });
+
+
 
 
 });

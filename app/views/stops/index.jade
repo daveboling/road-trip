@@ -9,18 +9,19 @@ block content
           each evnt in stop.events
             li= evnt
       .col-xs-6
-        form(method='post' id='events' actions='/trips/#{tripID}/stop/#{stop._id}')
-          button(type='button').btn.btn-success.full#addEvent Add More Events
-          .form-group.event
+        form(method='post' id='events' actions='/trips/#{tripID}/stop/#{stop._id}' enctype='multipart/form-data')
+          .form-group
+            label Add Photos
+            input(type='file' name='photos' multiple=true)
+          .form-group
+            button(type='button').btn.btn-success.full#addEvent Add More Events
             label Add Event(s)
-            input.form-control(type='text' name='event')
+            .event
+              input.form-control(type='text' name='event')
     .row
       .col-xs-6
         #photos
       .col-xs-6
-        .form-group
-          label Add Photos
-          input(type='file' name='photos' multiple=true)
         button(type='submit' form='events').btn.btn-danger.full Submit
 
 block scripts

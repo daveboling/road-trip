@@ -51,9 +51,27 @@ Stop.findById = function(query, cb){
   }); 
 };
 
-Stop.findEvents = function(query, cb){
-  var id = Mongo.ObjectID(query);
-  Stop.collection.findOne({_id: id})
+
+Stop.prototype.addPhotos = function(files){
+  var baseDir = __dirname + '/../static',
+      relDir  = '/img/' + this._id,
+      absDir  = baseDir + relDir;
+
+  fs.mkdirSync(absDir);
+
+  this.photos = files.photos.map(function(photo, index){
+    if(!photo.size){return;}
+
+    var ext      = path.extname(photo.path),
+        name     = index + ext,
+        absPath  = absDir + '/' + name,
+        relPath  = relDir + '/' + name;
+
+    fs.renameSync(photo.path, absPath);
+    return relPath;
+  });
+
+  this.photos = _.compact(this.photos);
 };
 
 module.exports = Stop;
