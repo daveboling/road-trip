@@ -1,18 +1,17 @@
 'use strict';
 
 var mp     = require('multiparty'),
-    moment = require('moment'),
-    Stop   = require('../models/stop');
+    Stop   = require('../models/stop'),
+    Mongo  = require('mongodb'),
+    Trip   = require('../models/trip');
     
 
 exports.createStop = function(req, res){
-
-  console.log('---GEOCODED STOPS---');
-  console.log(req.body);
-  console.log('---GEOCODES STOPS END---');
-
+  var names = (req.body.name.length === 1) ? req.body.name : [req.body.name]; 
   Stop.insert(req.body.stop, req.body.tripID, function(){
-    res.redirect('/trips/' + req.params.id );
+    Trip.collection.update({_id: Mongo.ObjectID(req.params.id)}, {$push : {stops: {$each : names}}}, function(){
+      res.redirect('/trips/' + req.params.id );
+    });
   });
 };
 

@@ -14,13 +14,13 @@ exports.create = function(req, res){
 
   form.parse(req, function(err, fields, files){
 
-    console.log('----FIELDS----');
-    console.log(fields);
-    console.log('----FIELDS END----');
+    //console.log('----FIELDS----');
+    //console.log(fields);
+    //console.log('----FIELDS END----');
 
-    console.log('----FILES----');
-    console.log(files);
-    console.log('----FILES END----');
+    //console.log('----FILES----');
+    //console.log(files);
+    //console.log('----FILES END----');
 
     Trip.create(fields, files, function(){
       res.redirect('/trips');
@@ -38,13 +38,13 @@ exports.stops = function(req, res){
   Trip.findById(req.params.id, function(trip){
     Stop.find(req.params.id, function(stops){
 
-      console.log('---FOUND TRIP---');
-      console.log(trip);
-      console.log('---FOUND TRIP END---');
+      //console.log('---FOUND TRIP---');
+      //console.log(trip);
+      //console.log('---FOUND TRIP END---');
 
-      console.log('---FOUND STOPs---');
-      console.log(stops);
-      console.log('---FOUND STOPs END---');
+      //console.log('---FOUND STOPs---');
+      //console.log(stops);
+      //console.log('---FOUND STOPs END---');
 
       res.render('trips/stops', {trip: trip, stops: stops});
     });

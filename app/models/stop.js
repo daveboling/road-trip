@@ -3,8 +3,7 @@
 var Mongo = require('mongodb'),
     _     = require('lodash'),
     fs    = require('fs'),
-    path  = require('path'),
-    async = require('async');
+    path  = require('path');
 
 function Stop(o){
   this._id     = Mongo.ObjectID();
@@ -34,10 +33,6 @@ Stop.insert = function(stops, tripID, cb){
     s = new Stop(stops);
     s.tripID = Mongo.ObjectID(tripID);
   }
-
-  console.log('---MODEL---');
-  console.log('---NEWLY CONSTRUCTED STOP(S)');
-  console.log(s);
 
   Stop.collection.insert(s, cb);
 };

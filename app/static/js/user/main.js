@@ -1,4 +1,5 @@
-/* GLOBAL FUNCTIONS */
+/* global google, geocode */
+/* jshint camelcase:false */
 
 function geocode(address, cb){
   'use strict';

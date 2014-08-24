@@ -66,18 +66,16 @@ describe('Stop', function(){
           name: 'Knoxville',
           lat: '36',
           lng: '90',
-          tripID: '000000000000000000000001'
         },
         {
           name: 'Seymour',
           lat: '40',
           lng: '90',
-          tripID: '000000000000000000000001'
         }
 
       ];
 
-      Stop.insert(stops, function(err, s){
+      Stop.insert(stops,'000000000000000000000001', function(err, s){
         console.log('Insert Multiple Stops Error:', err);
         expect(s).to.be.ok;
         done();
@@ -89,10 +87,9 @@ describe('Stop', function(){
           name: 'Knoxville',
           lat: '36',
           lng: '90',
-          tripID: '000000000000000000000001'
         };
 
-      Stop.insert(stop, function(err, s){
+      Stop.insert(stop, '000000000000000000000001', function(err, s){
         console.log('Insert Multiple Stops Error:', err);
         expect(s).to.be.ok;
         done();

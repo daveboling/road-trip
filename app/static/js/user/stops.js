@@ -1,4 +1,4 @@
-/* global google */
+/* global google, async, geocode */
 /* jshint quotmark:false */
 
 (function(){
@@ -126,10 +126,5 @@
     //Finally ready to submit
     $('form').submit();
   }
-
-
-
-
-
 
 })();
