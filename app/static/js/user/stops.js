@@ -1,4 +1,5 @@
 /* global google */
+/* jshint quotmark:false */
 
 (function(){
   'use strict';
@@ -17,11 +18,11 @@
 
 
     //Convert stops to waypoints for Google Maps
-    if(!waypoints.length){ 
+    if(!waypoints.length){
       waypoints = waypoints.map(function(div){
-        //var lat  = $('.coordinates').attr('data-lat'),
-        //lng  = $('.coordinates').attr('data-lng');
-        //return {location: new google.maps.LatLng(lat, lng)};
+        var lat  = $(div).attr('data-lat'),
+        lng  = $(div).attr('data-lng');
+        return {location: new google.maps.LatLng(lat, lng)};
       });
     }
 
@@ -43,17 +44,17 @@
       center: origin,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       styles: styles
-    };
+    },
+    //Display driving directions
+    directionsService = new google.maps.DirectionsService();
 
     //Set map equal to google.maps.Map, give it an ID to attach to and some options to see it up with
     map = new google.maps.Map(document.getElementById('map'), options);
 
     //Render options specific to directionsDisplay. E.G. the lines on the map
     var rendererOptions = {map: map},
-    directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
-
-    //Format the request to directions service
-    var request = {
+    directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions),
+    request = {
       origin: origin,
       destination: destination,
       waypoints: stops,
@@ -61,20 +62,19 @@
       travelMode: google.maps.DirectionsTravelMode.DRIVING
     };
 
-    //Display driving directions
-    var directionsService = new google.maps.DirectionsService();
+    //Set panel for Google Directions Service
     directionsDisplay.setPanel(document.getElementById('directions'));
 
     //Sends our request to directionsService where it will tell us if we're crazy or not
-    directionsService.route(request, function(response, status) {
-          if (status === google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-          }
-          else {
-          console.log(status);
-          console.log(response);
-        }
-        });
+    directionsService.route(request, function(response, status){
+      if (status === google.maps.DirectionsStatus.OK) {
+        directionsDisplay.setDirections(response);
+      }
+      else {
+        console.log(status);
+        console.log(response);
+      }
+    });
   }
 
 })();

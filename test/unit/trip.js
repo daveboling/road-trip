@@ -55,7 +55,7 @@ describe('Trip', function(){
       expect(trip.destination.lng).to.equal(-115.14);
       expect(trip.destination.name).to.equal('Las Vegas, TN, USA');
       expect(trip.distance).to.equal(1789);
-      
+
       //Trip Calculations
       expect(trip.gasPerGallon).to.equal(3.5);
       expect(trip.gallons).to.equal(52);
