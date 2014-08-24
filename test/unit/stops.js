@@ -25,9 +25,9 @@ describe('Stop', function(){
   describe('constructor', function(){
     it('should create a new Stop object', function(){
       var stop = new Stop({
-        _tripID: '000000000000000000000001', 
-        lat: '36.116', 
-        lng: '-110.116', 
+        _tripID: '000000000000000000000001',
+        lat: '36.116',
+        lng: '-110.116',
         name: 'Knoxville, TN, USA'
       });
 
@@ -65,12 +65,12 @@ describe('Stop', function(){
         {
           name: 'Knoxville',
           lat: '36',
-          lng: '90',
+          lng: '90'
         },
         {
           name: 'Seymour',
           lat: '40',
-          lng: '90',
+          lng: '90'
         }
 
       ];
@@ -85,7 +85,7 @@ describe('Stop', function(){
       var stop = {
           name: 'Knoxville',
           lat: '36',
-          lng: '90',
+          lng: '90'
         };
 
       Stop.insert(stop, '000000000000000000000001', function(err, s){
@@ -94,8 +94,5 @@ describe('Stop', function(){
       });
     });
   });
-
-
-
 
 });

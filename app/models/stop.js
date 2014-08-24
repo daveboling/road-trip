@@ -49,7 +49,7 @@ Stop.findById = function(query, cb){
   Stop.collection.findOne({_id: id}, function(err, obj){
     var stop = _.create(Stop.prototype, obj);
     cb(stop);
-  }); 
+  });
 };
 
 Stop.prototype.eventsAndPhotos = function(files, fields, cb){

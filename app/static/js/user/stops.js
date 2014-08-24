@@ -20,7 +20,7 @@
 
     //Turn stop into an array
     stops = $.makeArray(stops);
-    
+
 
     //Convert stops to waypoints for Google Maps
     if(stops.length){
